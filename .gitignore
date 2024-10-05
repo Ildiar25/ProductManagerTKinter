@@ -3,3 +3,6 @@
 
 # Virtual Environment
 /.venv
+
+# DB Browser files
+/database/products.db-journal
