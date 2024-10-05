@@ -1,0 +1,1 @@
+`python -m tkinter` -> Se usa para comprobar que tkinter esté funcionando perfectamente
