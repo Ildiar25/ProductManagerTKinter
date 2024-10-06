@@ -1,6 +1,5 @@
 from tkinter import Tk
 from models import MainWindow
-# import sqlite3
 
 
 def main():
