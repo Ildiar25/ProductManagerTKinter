@@ -10,11 +10,14 @@ class MainWindow:
     db = "database/products.db"
 
     # Color values
-    primary_bg = "#272b30"
-    secondary_bg = "#3a3f44"
-    bg_accent = "#7a8288"
-    primary_color = "#dee2e6"
-    secondary_color = "pink"
+    primary = "#3a3f44"
+    secondary = "#7a8288"
+    success = "#62c462"
+    info = "#5bc0de"
+    warning = "#f89406"
+    danger = "#ee5f5b"
+    light = "#e9ecef"
+    dark = "#272b30"
 
     # Order values
     ordered_by_name = False
@@ -35,16 +38,15 @@ class MainWindow:
 
         # Main window grid config
         self.window.grid_columnconfigure(0, weight=1)
-        self.window.grid_rowconfigure(0, weight=2)
-        self.window.grid_rowconfigure(1, weight=4)
-        self.window.grid_rowconfigure(2, weight=1)
+        # self.window.grid_rowconfigure(0, weight=1)
+        # self.window.grid_rowconfigure(1, weight=5)
+        # self.window.grid_rowconfigure(2, weight=1)
 
         # Background window style settings
         self.window.configure(
-            background=self.primary_bg,
+            background=self.dark,
             padx=10,
-            pady=10,
-
+            pady=10
         )
 
         # ---------- Main frames ----------
@@ -52,20 +54,20 @@ class MainWindow:
         # This frame contains the main form
         add_element_frame = Frame(self.window)
         add_element_frame.configure(
-            background=self.secondary_bg,
+            background=self.primary,
             pady=15,
             padx=15,
         )
         add_element_frame.grid_columnconfigure(0, weight=1)
         add_element_frame.grid_columnconfigure(1, weight=3)
         add_element_frame.grid_columnconfigure(2, weight=1)
-        add_element_frame.grid_rowconfigure(0, weight=1)
-        add_element_frame.grid(row=0, column=0, sticky=W + N + E + S, padx=5, pady=5)
+        # add_element_frame.grid_rowconfigure(0, weight=1)
+        add_element_frame.grid(row=0, column=0, padx=5, pady=5)
 
         # This frame contains the database table
         table_content_frame = Frame(self.window)
         table_content_frame.configure(
-            background=self.secondary_bg,
+            background=self.primary,
             pady=15,
             padx=15
         )
@@ -74,7 +76,7 @@ class MainWindow:
         # This frame contains the action buttons
         action_buttons_frame = Frame(self.window)
         action_buttons_frame.configure(
-            background=self.secondary_bg,
+            background=self.primary,
             pady=5,
             padx=5
         )
@@ -82,75 +84,124 @@ class MainWindow:
 
         # Form frame
         label_frame = LabelFrame(add_element_frame, text="Nuevo Producto")
-        label_frame.grid(row=0, column=1, sticky=W + N + E + S)
+        label_frame.grid(row=0, column=1)
         label_frame.configure(
-            background=self.secondary_bg,
-            foreground=self.primary_color,
+            background=self.primary,
+            foreground=self.light,
             borderwidth=2,
             font=("Calibri", 12, "bold"),
             padx=15,
             pady=15
         )
         label_frame.grid_columnconfigure(0, weight=1)
-        label_frame.grid_columnconfigure(1, weight=4)
+        label_frame.grid_columnconfigure(1, weight=1)
+        label_frame.grid_columnconfigure(2, weight=1)
+        label_frame.grid_columnconfigure(3, weight=1)
+        label_frame.grid_columnconfigure(4, weight=1)
 
         # Name label
-        self.name_label = Label(label_frame, text=">>> Nombre: ", anchor=E)
+        self.name_label = Label(label_frame, text="Nombre: ", anchor=E)
         self.name_label.configure(
-            background=self.secondary_bg,
-            foreground=self.primary_color,
+            background=self.primary,
+            foreground=self.light,
             font=("Calibri", 12, "italic"),
         )
-        self.name_label.grid(row=0, column=0, sticky=W + E)
+        self.name_label.grid(row=0, column=0, padx=5, pady=5, sticky=W + E)
 
         # Name entry
         self.name = Entry(label_frame)
         self.name.configure(
-            background=self.bg_accent,
+            background=self.dark,
             font=("Calibri", 12, "italic"),
-            foreground="pink"
+            foreground=self.light,
+            justify="right"
         )
         self.name.focus()  # Autofocus on the field
-        self.name.grid(row=0, column=1, sticky=W + E)
-    #
-    #     # Price label
-    #     self.price_label = Label(frame, text="Precio: ")
-    #     self.price_label.grid(row=2, column=0)
-    #
-    #     # Price entry
-    #     self.price = Entry(frame)
-    #     self.price.grid(row=2, column=1)
-    #
-    #     # Stock label
-    #     self.stock_label = Label(frame, text="Cantidad: ")
-    #     self.stock_label.grid(row=3, column=0)
-    #
-    #     # Stock entry
-    #     self.stock = Entry(frame)
-    #     self.stock.grid(row=3, column=1)
-    #
-    #     # Category label
-    #     self.category_label = Label(frame, text="Categoría: ")
-    #     self.category_label.grid(row=4)
-    #
-    #     # Category dropdown menu
-    #     self.choices = ["Consumible", "Electrónica", "Ordenador", "Telefonía"]
-    #     self.dropdown_menu = ttk.Combobox(
-    #         frame,  # Where menu will be
-    #         values=self.choices,  # Contains all available elements
-    #         textvariable=StringVar()  # Sets variable type (according to docs, is necessary set it)
-    #     )
-    #     self.dropdown_menu.current(0)  # Sets default value
-    #     self.dropdown_menu.grid(row=5, columnspan=2)
-    #
-    #     # Add button
-    #     self.add_button = ttk.Button(frame, text="Guardar", command=self.add_product)
-    #     self.add_button.grid(row=6, columnspan=2, sticky=W + E)
-    #
-    #     # Message label
-    #     self.info = Label(frame, text="", fg="#C21632")
-    #     self.info.grid(row=7, columnspan=2, sticky=W + E)
-    #
+        self.name.grid(row=0, column=1, columnspan=3, sticky=W + E)
+
+        # Price label
+        self.price_label = Label(label_frame, text="Precio: ", anchor=E)
+        self.price_label.configure(
+            background=self.primary,
+            foreground=self.light,
+            font=("Calibri", 12, "italic")
+        )
+        self.price_label.grid(row=1, column=0, padx=5, pady=5, sticky=W + E)
+
+        # Price entry
+        self.price = Entry(label_frame)
+        self.price.configure(
+            background=self.dark,
+            font=("Calibri", 12, "italic"),
+            foreground=self.light,
+            justify="right"
+        )
+        self.price.grid(row=1, column=1, columnspan=3, sticky=W + E)
+
+        # Stock label
+        self.stock_label = Label(label_frame, text="Cantidad: ", anchor=E)
+        self.stock_label.configure(
+            background=self.primary,
+            foreground=self.light,
+            font=("Calibri", 12, "italic")
+        )
+        self.stock_label.grid(row=2, column=0, padx=5, pady=5, sticky=W + E)
+
+        # Stock entry
+        self.stock = Entry(label_frame)
+        self.stock.configure(
+            background=self.dark,
+            font=("Calibri", 12, "italic"),
+            foreground=self.light,
+            justify="right"
+        )
+        self.stock.grid(row=2, column=1, columnspan=3, sticky=W + E)
+
+        # Category label
+        self.category_label = Label(label_frame, text="Categoría: ", anchor=E)
+        self.category_label.configure(
+            background=self.primary,
+            foreground=self.light,
+            font=("Calibri", 12, "italic")
+        )
+        self.category_label.grid(row=3, column=0, padx=5, pady=5, sticky=W + E)
+
+        # Category dropdown menu
+        self.choices = ["Consumible", "Electrónica", "Ordenador", "Telefonía"]
+        self.dropdown_menu = ttk.Combobox(label_frame, values=self.choices, state="readonly")
+        self.dropdown_menu.configure(
+            background=self.primary,
+            font=("Calibri", 12, "italic"),
+            justify="right"
+        )
+        self.dropdown_menu.current(0)  # Sets default value
+        self.dropdown_menu.grid(row=3, column=3)
+
+        self.divider01 = Frame(label_frame, height=3)
+        self.divider01.configure(
+            background=self.secondary,
+        )
+        self.divider01.grid(row=4, column=0, columnspan=5, padx=5, pady=10, sticky=W + E)
+
+        # Add button
+        self.add_button = Button(label_frame, text="Agregar producto", command=self.add_product)
+        self.add_button.configure(
+            # width=40,
+            background=self.warning,
+            foreground=self.primary,
+            font=("Calibri", 12, "bold")
+        )
+        self.add_button.grid(row=5, column=0, columnspan=5, padx=5, pady=5, sticky=W + E)
+
+        # Message label
+        self.info = Label(label_frame, text="", anchor=CENTER)
+        self.info.configure(
+            background=self.primary,
+            font=("Calibri", 13, "italic"),
+            fg=self.success
+        )
+        self.info.grid(row=6, column=0, columnspan=5, sticky=W + N + E + S)
+
     #     # Product Tables:
     #     style = ttk.Style()  # Creates the Style object
     #
@@ -293,24 +344,24 @@ class MainWindow:
     #     for element in records:
     #         self.table.insert("", 0, text=element[1], values=element[2:])
     #
-    # def add_product(self) -> None:
-    #     # Resets info message
-    #     self.info.config(text="")
-    #
-    #     if self.validate_name() and self.validate_price() and self.validate_stock():
-    #
-    #         # Set the request and its parameters
-    #         query = "INSERT INTO product(name, price, category, stock) VALUES (?, ?, ?, ?)"
-    #         parameters = (self.name.get(), self.price.get(), self.dropdown_menu.get(), self.stock.get())
-    #         self.new_request(query, parameters)
-    #
-    #         # User notification and update fields
-    #         self.info.config(text=f"¡Producto '{self.name.get()}' agregado!")
-    #         self.name.delete(0, END)
-    #         self.price.delete(0, END)
-    #         self.stock.delete(0, END)
-    #         self.dropdown_menu.current(0)
-    #
+    def add_product(self) -> None:
+        # Resets info message
+        self.info.config(text="")
+
+        if self.validate_name() and self.validate_price() and self.validate_stock():
+
+            # Set the request and its parameters
+            query = "INSERT INTO product(name, price, category, stock) VALUES (?, ?, ?, ?)"
+            parameters = (self.name.get(), self.price.get(), self.dropdown_menu.get(), self.stock.get())
+            self.new_request(query, parameters)
+
+            # User notification and update fields
+            self.info.config(text=f"¡Producto '{self.name.get()}' agregado!")
+            self.name.delete(0, END)
+            self.price.delete(0, END)
+            self.stock.delete(0, END)
+            self.dropdown_menu.current(0)
+
     #         # Update products table
     #         self.get_products()
     #
