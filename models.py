@@ -641,8 +641,6 @@ class MainWindow:
                 divider02.grid(row=2, column=0, columnspan=5, padx=5, pady=10, sticky=W + E)
 
                 old_data = [old_name, old_price, old_category, old_stock]
-                new_data = [new_name_entry.get(), new_price_entry.get(),
-                            new_category_entry.get(), new_stock_entry.get()]
 
                 edit_button = Button(new_window_frame, text="Actualizar",
                                      command=lambda: self.update_database_product(frame, old_data,
